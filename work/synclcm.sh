@@ -15,9 +15,11 @@ work_dir=$(basename "${path}")
 
 show_usage()
 {
-	printf "\nUsage: synclcm.sh [lcm_dir]\n\n"
-	printf "Param [lcm_dir] is the dir needed to sync,\n"
-	printf "and you can type its full or relative path.\n\n"
+	printf "\nUsage:\n"
+	printf "  synclcm.sh [lcm_dir]\n\n"
+	printf "You should run this in LK or Kernel dir!!!\n"
+	printf "Param [lcm_dir] is the source dir needed to sync,\n"
+	printf "and you should type its relative path.\n\n"
 }
 
 check_dir()
@@ -31,7 +33,9 @@ check_dir()
 	fi
 }
 
-if [ $(check_dir "$work_dir") ] || [ $# != 1 ]; then
+check_dir "$work_dir"
+
+if [ $? = 1 ] || [ $# != 1 ]; then
 	show_usage;
 	exit 1;
 fi
