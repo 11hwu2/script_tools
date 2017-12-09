@@ -2,11 +2,14 @@
 
 # This shell script is for remove some pdf password automatically
 # Note: please open terminal in the dir which include input pdf file,
-#	and run this, outputfile will be generated in the same dir.
+#	and run this, locked file will be unlocked.
 
-##############################
+############################################################
 # 2017-09-05	first version
-##############################
+############################################################
+# 2017-12-09	unlock file in /tmp, unlocked files keep 
+#		same name with locked
+############################################################
 
 #set -x
 
@@ -20,8 +23,14 @@ if [ $# != 1 ]; then
 	exit 1;
 fi
 
-/usr/bin/qpdf --password=$passwd --decrypt $inputfile $outputfile 
+tmpdir=$(mktemp -dt unlock_pdf.XXXXXX)
+
+mv "$inputfile" "$tmpdir"
+
+/usr/bin/qpdf --password=$passwd --decrypt "$tmpdir/$inputfile" "$tmpdir/$outputfile"
+
+cp "$tmpdir/$outputfile" "$inputfile"
 
 if [ $? = 0 ]; then
-	echo "outputfile is : $outputfile"
+	echo "unlock successfully!"
 fi
