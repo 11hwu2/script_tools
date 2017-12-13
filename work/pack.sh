@@ -42,8 +42,8 @@ echo "scatter file name: $scatter_file"
 
 file_list="`sed -n '/file_name: [a-z]/p' $scatter_file | sort -u | awk '{print $2}' | tr '\n' ' '`"
 
-echo "Compress file..."
+echo "Tar file..."
 
-tar czvf $1 $file_list $scatter_file
+tar cvf $1 $file_list $scatter_file
 
 echo "Done!"
