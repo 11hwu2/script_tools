@@ -28,6 +28,7 @@ case "${host_ip}" in
 	host_ip=''
 	echo -e "  Invalid host_ip!\n"
 	show_usage;
+	exit 1;
 	;;
 
 esac
