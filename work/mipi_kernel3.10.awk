@@ -2,7 +2,7 @@
 
 {
 	printf "\nrockchip,on-cmds%d {\n", NR
-	printf "compatible = rockchip,on-cmds;\n"
+	printf "compatible = \"rockchip,on-cmds\";\n"
 	printf "rockchip,cmd_type = <LPDT>;\n"
 	printf "rockchip,dsi_id = <0>;\n"
 	printf "rockchip,cmd = <"
